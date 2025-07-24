@@ -45,8 +45,16 @@ export async function addClientAndSendEmail(
       html: `<p>Hello ${name},</p><p>Welcome to our accountancy firm. We're excited to work with your business, ${businessName}!</p>`,
     });
     console.log("Resend response:", response);
-  } catch (e: any) {
-    console.error("Error sending email:", e?.response?.data || e.message || e);
+  } catch (e: unknown) {
+    if (e && typeof e === "object" && "response" in e && e.response && typeof e.response === "object" && "data" in e.response) {
+      // e.response.data is not typed, but we log it if present
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      console.error("Error sending email:", (e.response as { data?: unknown })?.data);
+    } else if (e instanceof Error) {
+      console.error("Error sending email:", e.message);
+    } else {
+      console.error("Error sending email:", e);
+    }
   }
 
   return {};

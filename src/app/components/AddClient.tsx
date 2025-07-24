@@ -62,8 +62,12 @@ export  const AddClientForm: React.FC<{ onClientAdded: () => void }> = ({
         setForm({ name: "", email: "", businessName: "" });
         onClientAdded();
       }
-    } catch (err: any) {
-      console.error(err)
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        console.error(err.message);
+      } else {
+        console.error(err);
+      }
       setError("Unexpected error. Please try again.");
     } finally {
       setLoading(false);

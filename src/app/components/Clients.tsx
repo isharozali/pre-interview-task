@@ -33,8 +33,12 @@ export const ClientList: React.FC = () => {
       } else if (data) {
         setClients(data as Client[]);
       }
-    } catch (err: any) {
-      console.error(err)
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        console.error(err.message);
+      } else {
+        console.error(err);
+      }
       setError("Failed to fetch clients.");
       setClients([]);
     } finally {

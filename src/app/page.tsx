@@ -5,13 +5,6 @@ import AddClientModal from "./components/AddClientModal";
 import { AddClientForm } from "./components/AddClient";
 import toast from "react-hot-toast";
 
-/**
- * AddClientForm component allows admin to add a new client.
- */
-
-/**
- * Home page for the client onboarding tool.
- */
 export default function HomePage(): React.ReactElement {
   // Used to trigger client list refresh after adding a client
   const [refresh, setRefresh] = useState<number>(0);
