@@ -45,7 +45,7 @@ export async function addClientAndSendEmail(
       html: `<p>Hello ${name},</p><p>Welcome to our accountancy firm. We're excited to work with your business, ${businessName}!</p>`,
     });
     console.log("Resend response:", response);
-  } catch (e) {
+  } catch (e: any) {
     console.error("Error sending email:", e?.response?.data || e.message || e);
   }
 
